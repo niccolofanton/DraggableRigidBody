@@ -1,12 +1,12 @@
 # **Draggable RigidBody Component**
 
-A flexible drag-and-drop component for **pmndrs/drei** + **react-three-rapier**
+A flexible drag-and-drop component for **[drei](https://github.com/pmndrs/drei)** + **[react-three-rapier](https://github.com/pmndrs/react-three-rapier)**
 
 ![demo](./demo.gif)
 
 ## **Features**
 
-- **Drag-and-Drop Physics:** Implements realistic, physics-based dragging behavior using `react-three-rapier` physics engine and `DragControls` from `pmndrs/drei`
+- **Drag-and-Drop Physics:** Implements realistic, physics-based dragging behavior using `react-three-rapier` physics engine and `DragControls` from `drei`
 - **Customizable Bounding Box:** Restrict object movement within defined boundaries.
 - **Wobbly effect** Optional spring joints provide "wobbly" effects for objects during and after drag events.
 - **Invisible Mesh for Control:** Uses a hidden mesh to improve the precision and fluidity of dragging.
@@ -18,7 +18,7 @@ A flexible drag-and-drop component for **pmndrs/drei** + **react-three-rapier**
 
 Simply download and import `DraggableRigidBody.tsx` and `CustomDragControls.tsx` into your project
 
-# IMPORTANT
+## **Important** 
 
 The component utilizes a modified version of [DragControls](https://drei.docs.pmnd.rs/gizmos/drag-controls#dragcontrols) that fixes overlaps (check [this issue](https://github.com/pmndrs/drei/issues/2097) and [this PR](https://github.com/pmndrs/drei/pull/2098) for additional info)
 
@@ -83,7 +83,7 @@ function MyScene() {
 | `enableSpringJoint` | `boolean`                                                        | Enable a spring joint for elastic drag behavior.                                                                                                                  |
 | `jointConfig`       | `{ restLength, stiffness, damping, springJointCollisionGroups }` | Configure spring joint properties (rest length, stiffness, and damping).                                                                                          |
 
----
+
 
 
 
