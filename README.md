@@ -2,7 +2,7 @@
 
 A flexible drag-and-drop component for **[drei](https://github.com/pmndrs/drei)** + **[react-three-rapier](https://github.com/pmndrs/react-three-rapier)**
 
-![demo](./demo.gif)
+![demo](./showcase.gif)
 
 ## **Features**
 
