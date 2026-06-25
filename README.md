@@ -1,14 +1,20 @@
+<div align="center">
+
 # **Draggable RigidBody Component**
 
-A flexible drag-and-drop component for **[drei](https://github.com/pmndrs/drei)** + **[react-three-rapier](https://github.com/pmndrs/react-three-rapier)**
+A flexible drag-and-drop component for **[React Three Fiber](https://github.com/pmndrs/react-three-fiber)** + **[react-three-rapier](https://github.com/pmndrs/react-three-rapier)**
+
+[![GitHub stars](https://img.shields.io/github/stars/niccolofanton/DraggableRigidBody?style=social)](https://github.com/niccolofanton/DraggableRigidBody/stargazers)
 
 ![demo](./showcase.gif)
 
+</div>
+
 ## **Features**
 
-- **Drag-and-Drop Physics:** Implements realistic, physics-based dragging behavior using `react-three-rapier` physics engine and `DragControls` from `drei`
+- **Drag-and-Drop Physics:** Physics-based dragging built on the `react-three-rapier` physics engine and a custom drag-controls implementation (`CustomDragControls`).
 - **Customizable Bounding Box:** Restrict object movement within defined boundaries.
-- **Wobbly effect** Optional spring joints provide "wobbly" effects for objects during and after drag events.
+- **Wobbly effect:** Optional spring joints provide "wobbly" effects for objects during and after drag events.
 - **Invisible Mesh for Control:** Uses a hidden mesh to improve the precision and fluidity of dragging.
 - **Flexible Configuration:** Easily configurable parameters for drag limits, joint stiffness, damping, and more.
 
@@ -16,11 +22,20 @@ A flexible drag-and-drop component for **[drei](https://github.com/pmndrs/drei)*
 
 ## **Installation**
 
-Simply download and import `DraggableRigidBody.tsx` and `CustomDragControls.tsx` into your project
+This is not a published npm package. Download `DraggableRigidBody.tsx` and `CustomDragControls.tsx` from this repo and import them into your project.
 
-## **Important** 
+The two files rely on the following runtime dependencies, which must already be installed in your project:
 
-The component utilizes a modified version of [DragControls](https://drei.docs.pmnd.rs/gizmos/drag-controls#dragcontrols) that fixes overlaps (check [this issue](https://github.com/pmndrs/drei/issues/2097) and [this PR](https://github.com/pmndrs/drei/pull/2098) for additional info)
+```bash
+npm install three @react-three/fiber @react-three/rapier @react-three/drei @use-gesture/react
+```
+
+- `@use-gesture/react` powers the dragging logic in `CustomDragControls.tsx`.
+- `@react-three/drei` is used only for a TypeScript type helper (`ForwardRefComponent`); drei's own `DragControls` is not used.
+
+## **Important**
+
+`CustomDragControls` is a modified version of drei's [DragControls](https://drei.docs.pmnd.rs/gizmos/drag-controls#dragcontrols) that fixes overlaps (see [this issue](https://github.com/pmndrs/drei/issues/2097) and [this PR](https://github.com/pmndrs/drei/pull/2098) for additional info).
 
 ```tsx
 const DraggableRigidBodyProps: Partial<DraggableRigidBodyProps> = {
@@ -77,15 +92,19 @@ function MyScene() {
 | `visibleMesh`       | `ReactElement<ThreeElements['mesh']>`                            | The mesh visible in the scene.                                                                                                                                    |
 | `groupProps`        | `GroupProps`                                                     | Set position, rotation.                                                                                                                                           |
 | `boundingBox`       | `[[number, number], ...]`                                        | Define min/max boundaries for dragging on the X, Y, and Z axes.                                                                                                   |
-| `dragControlsProps` | `Partial<CustomDragControlsProps>`                               | Customize drag control behavior, check [Drei docs](https://drei.docs.pmnd.rs/gizmos/drag-controls#dragcontrols) + `preventOverlap` set to true to avoid overlaps. |
+| `dragControlsProps` | `Partial<CustomDragControlsProps>`                               | Customize drag control behavior; set `preventOverlap` to `true` to avoid overlaps.                                                                                |
 | `rigidBodyProps`    | `RigidBodyProps`                                                 | Pass properties to the RigidBody component (e.g., mass, friction).                                                                                                |
 | `invisibleMesh`     | `ReactElement<ThreeElements['mesh']>`                            | A mesh used for precise drag control but hidden in the scene. Defaults to `visibleMesh`.                                                                          |
 | `enableSpringJoint` | `boolean`                                                        | Enable a spring joint for elastic drag behavior.                                                                                                                  |
 | `jointConfig`       | `{ restLength, stiffness, damping, springJointCollisionGroups }` | Configure spring joint properties (rest length, stiffness, and damping).                                                                                          |
 
+## **Tech stack**
 
-
-
+- [React Three Fiber](https://github.com/pmndrs/react-three-fiber) + [three.js](https://threejs.org/)
+- [react-three-rapier](https://github.com/pmndrs/react-three-rapier) (physics)
+- [@use-gesture/react](https://github.com/pmndrs/use-gesture) (drag handling in `CustomDragControls`)
+- [drei](https://github.com/pmndrs/drei) (TypeScript type helper only)
+- TypeScript
 
 # WARNING
 This is a work in progress! Take it as an example for your projects :)
