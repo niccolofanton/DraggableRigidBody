@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="DraggableRigidBody">
+  <rect width="64" height="64" rx="14" fill="#0d1014"/>
+  <rect x="16" y="16" width="32" height="32" rx="7" fill="#4f7cff"/>
+  <circle cx="46" cy="46" r="8" fill="#ff8a5c"/>
+</svg>

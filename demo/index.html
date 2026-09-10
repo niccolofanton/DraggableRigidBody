@@ -4,14 +4,121 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#0d1014" />
-    <title>DraggableRigidBody — physics drag & drop for React Three Fiber</title>
+
+    <title>DraggableRigidBody — physics drag &amp; drop for R3F</title>
     <meta
       name="description"
-      content="Live demo of DraggableRigidBody: physics-based drag-and-drop for React Three Fiber, built on react-three-rapier and @use-gesture/react."
+      content="A React Three Fiber component for physics-based drag-and-drop, built on react-three-rapier and @use-gesture/react, with a bounding box and spring-joint wobble."
     />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23111418'/><rect x='26' y='26' width='48' height='48' rx='10' fill='%234f7cff'/></svg>" />
+    <meta name="author" content="Niccolò Fanton" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://drag.niccolofanton.dev/" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Niccolò Fanton" />
+    <meta property="og:title" content="DraggableRigidBody — physics drag &amp; drop for R3F" />
+    <meta
+      property="og:description"
+      content="A React Three Fiber component for physics-based drag-and-drop, built on react-three-rapier and @use-gesture/react, with a bounding box and spring-joint wobble."
+    />
+    <meta property="og:url" content="https://drag.niccolofanton.dev/" />
+    <meta property="og:image" content="https://drag.niccolofanton.dev/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Six procedural rigid bodies resting inside a wireframe bounding box in the DraggableRigidBody demo."
+    />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="DraggableRigidBody — physics drag &amp; drop for R3F" />
+    <meta
+      name="twitter:description"
+      content="A React Three Fiber component for physics-based drag-and-drop, built on react-three-rapier and @use-gesture/react, with a bounding box and spring-joint wobble."
+    />
+    <meta name="twitter:image" content="https://drag.niccolofanton.dev/og.png" />
+    <meta
+      name="twitter:image:alt"
+      content="Six procedural rigid bodies resting inside a wireframe bounding box in the DraggableRigidBody demo."
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareSourceCode",
+        "name": "DraggableRigidBody",
+        "description": "A customizable React Three Fiber component for physics-based drag-and-drop: it pairs react-three-rapier bodies with @use-gesture/react pointer gestures, adds an optional bounding box, an invisible proxy mesh for precise grabbing and spring joints for a wobbly follow.",
+        "url": "https://drag.niccolofanton.dev/",
+        "image": "https://drag.niccolofanton.dev/og.png",
+        "applicationCategory": "DeveloperApplication",
+        "codeRepository": "https://github.com/niccolofanton/DraggableRigidBody",
+        "programmingLanguage": "TypeScript",
+        "runtimePlatform": "React Three Fiber",
+        "license": "https://opensource.org/licenses/MIT",
+        "inLanguage": "en",
+        "isAccessibleForFree": true,
+        "keywords": "React Three Fiber, react-three-rapier, use-gesture, drag and drop, physics, rapier, three.js, spring joint",
+        "author": {
+          "@type": "Person",
+          "name": "Niccolò Fanton",
+          "url": "https://niccolofanton.dev",
+          "sameAs": ["https://github.com/niccolofanton"]
+        }
+      }
+    </script>
+
+    <style>
+      /* Crawlable copy: present in the served HTML, hidden from sighted users. */
+      .seo-copy {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        white-space: nowrap;
+        border: 0;
+      }
+    </style>
   </head>
   <body>
+    <main class="seo-copy">
+      <h1>DraggableRigidBody — physics-based drag and drop for React Three Fiber</h1>
+      <p>
+        This demo drops six procedural rigid bodies — a cube, a sphere, a dodecahedron, an
+        octahedron, a capsule and a glossy ball — into a visible bounding box simulated by
+        react-three-rapier. Grab one with the pointer and fling it: the drag is driven by
+        <code>@use-gesture/react</code>, which projects the pointer onto a plane and moves an
+        invisible proxy mesh; the real body follows through the physics solver instead of being
+        teleported, so momentum, collisions and the walls of the box all keep working while you
+        hold it. Switching the <em>joint</em> control from None to Spring or Jelly links the body to
+        its handle with a rapier spring joint, giving the wobbly, lagging follow, and gravity is
+        editable live from the panel.
+      </p>
+      <p>
+        DraggableRigidBody is not published on npm: you copy <code>DraggableRigidBody.tsx</code> and
+        <code>CustomDragControls.tsx</code> from
+        <a href="https://github.com/niccolofanton/DraggableRigidBody"
+          >the DraggableRigidBody repository on GitHub</a
+        >
+        into your project and install <code>three</code>, <code>@react-three/fiber</code>,
+        <code>@react-three/rapier</code>, <code>@react-three/drei</code> and
+        <code>@use-gesture/react</code> alongside it. <code>CustomDragControls</code> is a modified
+        drei <code>DragControls</code> that fixes overlapping drags.
+      </p>
+      <p>
+        More experiments on
+        <a href="https://demos.niccolofanton.dev">the three.js and WebGL demo hub</a>, and the rest
+        of the work on <a href="https://niccolofanton.dev">Niccolò Fanton's portfolio</a>.
+      </p>
+    </main>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

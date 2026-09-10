@@ -53,7 +53,7 @@ canvas {
   max-width: min(360px, calc(100vw - 32px));
 }
 
-.hud h1 {
+.hud .brand {
   margin: 0;
   font-size: 15px;
   font-weight: 650;

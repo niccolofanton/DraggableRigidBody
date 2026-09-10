@@ -42,7 +42,7 @@ export default function App() {
       {!ready && <div className="loader">loading physics…</div>}
 
       <div className="hud">
-        <h1>DraggableRigidBody</h1>
+        <p className="brand">DraggableRigidBody</p>
         <p>
           Grab a shape and fling it: the bounding box keeps it in, the walls bounce it back. Set
           <em> joint </em> to Spring or Jelly for the wobbly variant. Drag the background to orbit.
