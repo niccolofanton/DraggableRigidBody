@@ -4,7 +4,8 @@ import { Grid, OrbitControls } from '@react-three/drei';
 import { CuboidCollider, Physics, RigidBody } from '@react-three/rapier';
 import { useThree } from '@react-three/fiber';
 import DraggableRigidBody from '../../DraggableRigidBody';
-import { ARENA, BODIES, DRAG_BOUNDS, FEELS, type BodyDef, type FeelId } from './config';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
+import { ARENA, BODIES, DRAG_BOUNDS, FEELS, FINISHES, type BodyDef, type FeelId } from './config';
 
 const ARENA_SIZE: [number, number, number] = [
   ARENA.x[1] - ARENA.x[0],
@@ -69,12 +70,7 @@ function Body({ def, feel, gravityScale }: BodyProps) {
       visibleMesh={
         <mesh castShadow receiveShadow>
           {bodyGeometry(def.id)}
-          <meshStandardMaterial
-            color={def.color}
-            roughness={def.metalness ? 0.12 : 0.35}
-            metalness={def.metalness ?? 0.05}
-            envMapIntensity={0.6}
-          />
+          <meshStandardMaterial {...FINISHES[def.finish]} />
         </mesh>
       }
       // A plain box, a little larger than the shape, is what the pointer
@@ -187,6 +183,29 @@ function FitCamera() {
   return null;
 }
 
+/**
+ * three-starter's environment: three's generated RoomEnvironment through
+ * PMREM, used as the scene light. No HDRI download, works offline.
+ */
+function RoomEnv() {
+  const gl = useThree((s) => s.gl);
+  const scene = useThree((s) => s.scene);
+
+  useEffect(() => {
+    const pmrem = new THREE.PMREMGenerator(gl);
+    const texture = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    pmrem.dispose();
+    scene.environment = texture;
+    scene.environmentIntensity = 0.55;
+    return () => {
+      scene.environment = null;
+      texture.dispose();
+    };
+  }, [gl, scene]);
+
+  return null;
+}
+
 function Ready({ onReady }: { onReady: () => void }) {
   useEffect(onReady, [onReady]);
   return null;
@@ -207,10 +226,13 @@ export default function Scene({ feel, gravityScale, showBounds, epoch, onReady }
       <color attach="background" args={['#0d1014']} />
       <fog attach="fog" args={['#0d1014', 20, 46]} />
 
-      <hemisphereLight args={['#a8bcdc', '#11161e', 0.9]} />
+      {/* three-starter lighting setup: the environment map is the main light.
+          One shadow-only directional stays, because dynamic bodies with no cast
+          shadow float visually — RoomEnvironment cannot cast one. */}
+      <RoomEnv />
       <directionalLight
         position={[7, 12, 6]}
-        intensity={2.4}
+        intensity={0.7}
         castShadow
         shadow-mapSize={[2048, 2048]}
         shadow-bias={-0.0005}
@@ -221,11 +243,10 @@ export default function Scene({ feel, gravityScale, showBounds, epoch, onReady }
         shadow-camera-near={0.5}
         shadow-camera-far={40}
       />
-      <directionalLight position={[-8, 4, -6]} intensity={0.6} color="#4f7cff" />
 
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.001, 0]} receiveShadow>
         <planeGeometry args={[80, 80]} />
-        <meshStandardMaterial color="#1b212b" roughness={0.9} metalness={0} />
+        <meshStandardMaterial color="#1a1a20" roughness={0.9} metalness={0} />
       </mesh>
 
       <Grid

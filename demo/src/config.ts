@@ -55,23 +55,37 @@ export const FEELS: Record<FeelId, Feel> = {
   jelly: { label: 'Jelly', enableSpringJoint: true, stiffness: 110, damping: 1.5 },
 };
 
+/**
+ * The five shared finishes from the three-dof-ultramock scene: a lead (chalk),
+ * a counterweight (graphite) and three accents. Plain MeshStandard values —
+ * the environment map is what makes the metals read.
+ */
+export const FINISHES = {
+  chalk: { color: '#eef1f5', roughness: 0.6, metalness: 0 },
+  graphite: { color: '#272c34', roughness: 0.35, metalness: 1 },
+  coral: { color: '#ff5a36', roughness: 0.32, metalness: 0 },
+  ink: { color: '#1b4fb0', roughness: 0.28, metalness: 0 },
+  brass: { color: '#c79a2e', roughness: 0.24, metalness: 1 },
+} as const;
+
+export type FinishId = keyof typeof FINISHES;
+
 export interface BodyDef {
   id: string;
-  color: string;
+  finish: FinishId;
   position: [number, number, number];
   /** Rapier collider generator that matches the geometry. */
   colliders: 'hull' | 'ball' | 'cuboid';
   /** Half-size of the invisible drag proxy: a slightly generous grab target. */
   proxy: [number, number, number];
-  metalness?: number;
 }
 
 /** Every start position sits inside the arena, so nothing spawns above the lid. */
 export const BODIES: BodyDef[] = [
-  { id: 'cube', color: '#4f7cff', position: [-3.0, 2.0, -1.1], colliders: 'cuboid', proxy: [0.85, 0.85, 0.85] },
-  { id: 'ball', color: '#ff6b6b', position: [-1.2, 4.4, 1.0], colliders: 'ball', proxy: [0.95, 0.95, 0.95] },
-  { id: 'icosa', color: '#ffd166', position: [1.1, 1.9, -1.4], colliders: 'hull', proxy: [1.0, 1.0, 1.0] },
-  { id: 'capsule', color: '#06d6a0', position: [2.9, 4.2, 0.9], colliders: 'hull', proxy: [0.8, 1.2, 0.8] },
-  { id: 'dodeca', color: '#c77dff', position: [0.3, 3.2, 0.2], colliders: 'hull', proxy: [1.0, 1.0, 1.0] },
-  { id: 'chrome', color: '#dfe6f0', position: [-2.3, 5.2, 1.6], colliders: 'ball', proxy: [0.9, 0.9, 0.9], metalness: 0.9 },
+  { id: 'cube', finish: 'ink', position: [-3.0, 2.0, -1.1], colliders: 'cuboid', proxy: [0.85, 0.85, 0.85] },
+  { id: 'ball', finish: 'coral', position: [-1.2, 4.4, 1.0], colliders: 'ball', proxy: [0.95, 0.95, 0.95] },
+  { id: 'icosa', finish: 'brass', position: [1.1, 1.9, -1.4], colliders: 'hull', proxy: [1.0, 1.0, 1.0] },
+  { id: 'capsule', finish: 'chalk', position: [2.9, 4.2, 0.9], colliders: 'hull', proxy: [0.8, 1.2, 0.8] },
+  { id: 'dodeca', finish: 'chalk', position: [0.3, 3.2, 0.2], colliders: 'hull', proxy: [1.0, 1.0, 1.0] },
+  { id: 'chrome', finish: 'graphite', position: [-2.3, 5.2, 1.6], colliders: 'ball', proxy: [0.9, 0.9, 0.9] },
 ];
