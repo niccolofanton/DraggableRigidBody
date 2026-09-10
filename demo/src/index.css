@@ -1,0 +1,99 @@
+:root {
+  color-scheme: dark;
+  --fg: #e8ecf2;
+  --muted: #8b95a5;
+  --accent: #4f7cff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: #0d1014;
+}
+
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: var(--fg);
+  /* the scene is pointer-driven: never let the browser steal the gesture */
+  touch-action: none;
+  overscroll-behavior: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+canvas {
+  display: block;
+  touch-action: none;
+}
+
+.hud::before {
+  content: '';
+  position: absolute;
+  inset: -24px -32px -40px -32px;
+  background: radial-gradient(120% 100% at 0% 100%, rgba(13, 16, 20, 0.92), rgba(13, 16, 20, 0));
+  z-index: -1;
+}
+
+.hud {
+  position: fixed;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  left: max(16px, env(safe-area-inset-left));
+  z-index: 10;
+  pointer-events: none;
+  max-width: min(360px, calc(100vw - 32px));
+}
+
+.hud h1 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+}
+
+.hud em { font-style: normal; color: var(--fg); }
+
+.hud p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.hud a {
+  pointer-events: auto;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(79, 124, 255, 0.35);
+}
+
+.hud a:hover {
+  border-bottom-color: var(--accent);
+}
+
+.loader {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .hud p {
+    font-size: 12px;
+  }
+}

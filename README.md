@@ -6,6 +6,8 @@ A flexible drag-and-drop component for **[React Three Fiber](https://github.com/
 
 [![GitHub stars](https://img.shields.io/github/stars/niccolofanton/DraggableRigidBody?style=social)](https://github.com/niccolofanton/DraggableRigidBody/stargazers)
 
+**[Live demo](https://drag.niccolofanton.dev)** &nbsp;·&nbsp; **[Features](#features) · [Usage](#usage) · [Props](#props)**
+
 ![demo](./showcase.gif)
 
 </div>
@@ -32,6 +34,21 @@ npm install three @react-three/fiber @react-three/rapier @react-three/drei @use-
 
 - `@use-gesture/react` powers the dragging logic in `CustomDragControls.tsx`.
 - `@react-three/drei` is used only for a TypeScript type helper (`ForwardRefComponent`); drei's own `DragControls` is not used.
+
+## **Demo**
+
+The `demo/` folder is a small Vite + React app that imports the component straight from the
+repository root, so it always runs the file published here — not a copy.
+
+```bash
+cd demo
+npm install
+npm run dev
+```
+
+It drops six procedural bodies into a visible bounding box: drag one and fling it, switch the
+`joint` control to see the spring-joint variants, and change gravity on the fly.
+Live at **[drag.niccolofanton.dev](https://drag.niccolofanton.dev)**.
 
 ## **Important**
 
