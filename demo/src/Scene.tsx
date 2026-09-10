@@ -4,7 +4,7 @@ import { Grid, OrbitControls } from '@react-three/drei';
 import { CuboidCollider, Physics, RigidBody } from '@react-three/rapier';
 import { useThree } from '@react-three/fiber';
 import DraggableRigidBody from '../../DraggableRigidBody';
-import { ARENA, BODIES, DRAG_BOUNDS, FEELS, localDragLimits, type BodyDef, type FeelId } from './config';
+import { ARENA, BODIES, DRAG_BOUNDS, FEELS, type BodyDef, type FeelId } from './config';
 
 const ARENA_SIZE: [number, number, number] = [
   ARENA.x[1] - ARENA.x[0],
@@ -57,7 +57,6 @@ function Body({ def, feel, gravityScale }: BodyProps) {
       dragControlsProps={{
         // without this, grabbing a body also drags whatever sits behind it
         preventOverlap: true,
-        dragLimits: localDragLimits(def.position),
       }}
       rigidBodyProps={{
         colliders: def.colliders,

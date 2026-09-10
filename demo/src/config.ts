@@ -2,13 +2,16 @@
  * Arena = the box you can see. Its six faces are real Rapier colliders, so a
  * body that is thrown hard bounces off them instead of flying away.
  *
- * Drag bounds = the arena inset by the radius of the biggest body. They are fed
- * to `boundingBox` (DraggableRigidBody) and to `dragControlsProps.dragLimits`
- * (CustomDragControls) so a pointer can never push a body through a wall.
+ * Drag bounds = the arena inset by the radius of the biggest body, fed to
+ * `boundingBox` (DraggableRigidBody) so a pointer can never push a kinematic
+ * body through a wall. In the spring modes the body stays dynamic, so the wall
+ * colliders themselves contain it and no drag clamp is needed.
  *
- * Both are needed: `boundingBox` is applied to the rigid body directly, but the
- * component short-circuits it when `enableSpringJoint` is on and steers the
- * spring anchor instead — `dragLimits` clamps that anchor.
+ * `dragControlsProps.dragLimits` is deliberately NOT used: CustomDragControls
+ * applies it to its own group's local matrix, which only moves during drags,
+ * while physics motion is absorbed by the mesh inside the group. The two frames
+ * drift apart the moment a body falls, so the clamp box would end up wherever
+ * the body last rested — after the initial drop, bodies could barely be lifted.
  */
 export const ARENA = {
   x: [-4.5, 4.5],
@@ -28,15 +31,6 @@ export const DRAG_BOUNDS: Bounds3 = [
   [ARENA.y[0] + 0.35, ARENA.y[1] - INSET],
   [ARENA.z[0] + INSET, ARENA.z[1] - INSET],
 ];
-
-/**
- * CustomDragControls writes into the *local* matrix of its own group, so its
- * `dragLimits` live in the parent group's space. Same box, shifted by wherever
- * the body was placed.
- */
-export function localDragLimits(origin: [number, number, number]): Bounds3 {
-  return DRAG_BOUNDS.map((axis, i) => [axis[0] - origin[i], axis[1] - origin[i]]) as Bounds3;
-}
 
 export type FeelId = 'rigid' | 'springy' | 'jelly';
 
