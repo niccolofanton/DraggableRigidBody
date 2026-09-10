@@ -123,5 +123,12 @@ function MyScene() {
 - [drei](https://github.com/pmndrs/drei) (TypeScript type helper only)
 - TypeScript
 
+## **Credits**
+
+- `CustomDragControls.tsx` is a modified version of [`DragControls`](https://drei.docs.pmnd.rs/gizmos/drag-controls#dragcontrols) from [@react-three/drei](https://github.com/pmndrs/drei) — MIT License, Copyright (c) 2020 react-spring ([LICENSE](https://github.com/pmndrs/drei/blob/master/LICENSE)). It adds `preventOverlap` to fix the overlap issue described in [drei#2097](https://github.com/pmndrs/drei/issues/2097) / [drei#2098](https://github.com/pmndrs/drei/pull/2098).
+- Physics via [react-three-rapier](https://github.com/pmndrs/react-three-rapier) (MIT, © Poimandres), which wraps the [Rapier](https://rapier.rs/) engine (Apache-2.0).
+- Drag gestures via [@use-gesture/react](https://github.com/pmndrs/use-gesture) (MIT, © Poimandres).
+- Built on [React Three Fiber](https://github.com/pmndrs/react-three-fiber) (MIT, © react-spring / Poimandres) and [three.js](https://threejs.org/) (MIT, © three.js authors).
+
 # WARNING
 This is a work in progress! Take it as an example for your projects :)

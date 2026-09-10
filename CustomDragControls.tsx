@@ -1,3 +1,14 @@
+/**
+ * CustomDragControls — a modified version of `DragControls` from
+ * @react-three/drei (https://github.com/pmndrs/drei), adapted to add
+ * `preventOverlap` and to work with react-three-rapier rigid bodies.
+ * See https://github.com/pmndrs/drei/issues/2097 and
+ * https://github.com/pmndrs/drei/pull/2098.
+ *
+ * Original source: MIT License, Copyright (c) 2020 react-spring
+ * (https://github.com/pmndrs/drei/blob/master/LICENSE).
+ * Modifications: Copyright (c) 2026 Niccolo Fanton, MIT.
+ */
 import * as React from 'react'
 import * as THREE from 'three'
 import { useThree } from '@react-three/fiber'
