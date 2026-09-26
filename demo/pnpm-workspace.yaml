@@ -1,0 +1,4 @@
+allowBuilds:
+  esbuild: set this to true or false
+minimumReleaseAgeExclude:
+  - '@niccolofanton/driftpane@1.4.1 || 1.4.2'
